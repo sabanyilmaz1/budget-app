@@ -3,10 +3,10 @@ import { fetchAction, fetchQuery } from "convex/nextjs";
 import ContentSection from "~/components/homepage/content";
 import Footer from "~/components/homepage/footer";
 import Integrations from "~/components/homepage/integrations";
-import Pricing from "~/components/homepage/pricing";
-import Team from "~/components/homepage/team";
 import { api } from "../../convex/_generated/api";
 import type { Route } from "./+types/home";
+import { HowItWork } from "~/components/homepage/how-it-work";
+import { Why } from "~/components/homepage/why";
 
 export function meta({}: Route.MetaArgs) {
   const title = "React Starter Kit - Launch Your SAAS Quickly";
@@ -79,9 +79,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <Integrations loaderData={loaderData} />
-      <ContentSection />
-      <Team />
-      <Pricing loaderData={loaderData} />
+      {/* <ContentSection /> */}
+      <HowItWork />
+      <Why />
       <Footer />
     </>
   );

@@ -8,9 +8,10 @@ import { cn } from "~/lib/utils";
 
 const menuItems = [
   { name: "Home", href: "#hero" },
-  { name: "Features", href: "#features" },
-  { name: "Team", href: "#team" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Fonctionnalités", href: "#features" },
+  { name: "Comment ça marche", href: "#how-it-works" },
+  { name: "Tarifs", href: "#pricing" },
+  { name: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = ({
@@ -43,13 +44,17 @@ export const Navbar = ({
   }, []);
 
   // Simple computations don't need useMemo
-  const dashboardLink = !loaderData?.isSignedIn 
-    ? "/sign-up" 
-    : loaderData.hasActiveSubscription ? "/dashboard" : "/pricing";
+  const dashboardLink = !loaderData?.isSignedIn
+    ? "/sign-up"
+    : loaderData.hasActiveSubscription
+      ? "/dashboard"
+      : "/pricing";
 
-  const dashboardText = !loaderData?.isSignedIn 
+  const dashboardText = !loaderData?.isSignedIn
     ? "Get Started (Demo)"
-    : loaderData.hasActiveSubscription ? "Dashboard" : "Subscribe";
+    : loaderData.hasActiveSubscription
+      ? "Dashboard"
+      : "Commencer maintenant";
   return (
     <header>
       <nav
@@ -71,7 +76,8 @@ export const Navbar = ({
                 className="flex items-center space-x-2 font-semibold text-xl"
                 prefetch="viewport"
               >
-                <img src="/rsk.png" alt="RSK Logo" className="h-12 w-12" />
+                {/* <img src="/rsk.png" alt="RSK Logo" className="h-12 w-12" /> */}
+                Budget Planner
               </Link>
 
               <button
@@ -115,14 +121,6 @@ export const Navbar = ({
                 </ul>
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Link
-                  to="https://github.com/michaelshimeles/react-starter-kit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center"
-                >
-                  <Github className="w-5 h-5" />
-                </Link>
                 {loaderData?.isSignedIn ? (
                   <div className="flex items-center gap-3">
                     <Button asChild size="sm">
