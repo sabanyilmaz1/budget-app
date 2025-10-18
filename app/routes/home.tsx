@@ -7,6 +7,7 @@ import { api } from "../../convex/_generated/api";
 import type { Route } from "./+types/home";
 import { HowItWork } from "~/components/homepage/how-it-work";
 import { Why } from "~/components/homepage/why";
+import { Faq } from "~/components/homepage/faq";
 
 export function meta({}: Route.MetaArgs) {
   const title = "React Starter Kit - Launch Your SAAS Quickly";
@@ -82,6 +83,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       {/* <ContentSection /> */}
       <HowItWork />
       <Why />
+      <Faq />
       <Footer />
     </>
   );

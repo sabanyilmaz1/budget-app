@@ -1,38 +1,39 @@
 import { Link } from "react-router";
+import { Separator } from "../ui/separator";
 
 export default function FooterSection() {
   return (
-    <footer className="py-16 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
-        <Link to="/" aria-label="go home" className="mx-auto block size-fit">
-          <img src="/rsk.png" alt="RSK Logo" className="h-12 w-12" />
-        </Link>
-        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
+    <footer className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+      <Separator role="presentation" className="mb-8 sm:mb-12" />
+
+      <div className="flex w-full flex-col-reverse items-center gap-6 sm:gap-8 lg:flex-row lg:justify-between lg:gap-6">
+        <p className="text-sm sm:text-base text-muted-foreground text-center lg:text-left">
+          © 2025 App Budget. Tous droits réservés.
+        </p>
+
+        <nav
+          className="flex flex-col items-center gap-4 sm:gap-6 text-sm sm:text-base md:flex-row md:gap-8"
+          aria-label="Legal links"
+        >
           <Link
-            to="https://x.com/rasmickyy"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X/Twitter"
-            className="text-muted-foreground hover:text-primary block"
+            to="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            <svg
-              className="size-6"
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M10.488 14.651L15.25 21h7l-7.858-10.478L20.93 3h-2.65l-5.117 5.886L8.75 3h-7l7.51 10.015L2.32 21h2.65zM16.25 19L5.75 5h2l10.5 14z"
-              ></path>
-            </svg>
+            Politique de confidentialité
           </Link>
-        </div>
-        <span className="text-muted-foreground block text-center text-sm">
-          {" "}
-          © {new Date().getFullYear()} RSK, All rights reserved
-        </span>
+          <Link
+            to="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Conditions d'utilisation
+          </Link>
+          <Link
+            to="#"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
     </footer>
   );
