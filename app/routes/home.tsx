@@ -8,6 +8,7 @@ import type { Route } from "./+types/home";
 import { HowItWork } from "~/components/homepage/how-it-work";
 import { Why } from "~/components/homepage/why";
 import { Faq } from "~/components/homepage/faq";
+import { Bentogrid } from "~/components/homepage/bentogrid";
 
 export function meta({}: Route.MetaArgs) {
   const title = "React Starter Kit - Launch Your SAAS Quickly";
@@ -83,6 +84,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       {/* <ContentSection /> */}
       <HowItWork />
       <Why />
+      <Bentogrid />
       <Faq />
       <Footer />
     </>

@@ -139,7 +139,7 @@ export const Navbar = ({
                       className={cn(isScrolled && "lg:hidden")}
                     >
                       <Link to="/sign-in" prefetch="viewport">
-                        <span>Login</span>
+                        <span>Se connecter</span>
                       </Link>
                     </Button>
                     <Button
@@ -148,7 +148,7 @@ export const Navbar = ({
                       className={cn(isScrolled && "lg:hidden")}
                     >
                       <Link to="/sign-up" prefetch="viewport">
-                        <span>Sign Up</span>
+                        <span>Créer un compte</span>
                       </Link>
                     </Button>
                     <Button
