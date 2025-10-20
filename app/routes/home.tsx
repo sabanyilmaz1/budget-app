@@ -81,7 +81,6 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <Integrations loaderData={loaderData} />
-      {/* <ContentSection /> */}
       <HowItWork />
       <Why />
       <Bentogrid />
