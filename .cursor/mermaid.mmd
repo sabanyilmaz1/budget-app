@@ -6,7 +6,7 @@ erDiagram
   MONTH {
     UUID id PK
     DATE month          "ex: 2025-11-01 (1er du mois)"
-    TEXT note           "optionnel"
+    TEXT note           "notes / événements du mois"
   }
 
   %% =========================
@@ -26,13 +26,13 @@ erDiagram
   EXPENSE {
     UUID id PK
     UUID month_id FK
-    UUID fixed_template_id FK "optionnel si issu d'un template"
+    UUID fixed_template_id FK "optionnel si vient d'un template"
     BIGINT amount_cents
     TEXT description
     TEXT label            "ex: 'Courses', 'Loyer', 'Essence'"
     TIMESTAMPTZ happened_at
-    BOOLEAN is_fixed      "true si occurrence de fixe"
-    BOOLEAN is_paid       "utile surtout pour les fixes"
+    BOOLEAN is_fixed      "true = dépense fixe du mois"
+    BOOLEAN is_paid       "surtout utile pour les fixes"
   }
 
   MONTH ||--o{ EXPENSE : "contient"
@@ -104,5 +104,5 @@ erDiagram
     TEXT note               "optionnel"
   }
 
-  %% Remarque : FIXED_PERIODIC est volontairement SANS lien vers les autres tables.
-  %% Il sert uniquement de registre de rappels (aucune création auto dans EXPENSE).
+  %% FIXED_PERIODIC ne crée rien automatiquement :
+  %% il sert juste de base pour des rappels/logique de warning.

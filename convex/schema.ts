@@ -42,4 +42,89 @@ export default defineSchema({
   })
     .index("type", ["type"])
     .index("polarEventId", ["polarEventId"]),
+
+  //default formula for savings
+  savingsFormula: defineTable({
+    name: v.string(),
+    formula: v.string(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  labels: defineTable({
+    name: v.string(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  months: defineTable({
+    name: v.string(),
+    notes: v.optional(v.array(v.string())),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    initialBalance: v.number(),
+    savingsFormula: v.optional(v.string()),
+  }),
+
+  fixedExpense: defineTable({
+    name: v.string(),
+    amount: v.number(),
+    dayOfMonth: v.optional(v.number()),
+    active: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  expense: defineTable({
+    monthId: v.string(),
+    fixedExpenseId: v.optional(v.string()), //optional if the expense is not a fixed expense
+    amount: v.number(),
+    description: v.optional(v.string()),
+    labelIds: v.optional(v.array(v.string())),
+    happenedAt: v.number(),
+    isPaid: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  envelope: defineTable({
+    name: v.string(),
+    amount: v.number(),
+    ceilingAmount: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  envelopeContribution: defineTable({
+    envelopeId: v.string(),
+    amount: v.number(),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  savings: defineTable({
+    balance: v.number(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  savingsMove: defineTable({
+    savingsId: v.string(),
+    amount: v.number(),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
+  fixedPeriodic: defineTable({
+    name: v.string(),
+    amount: v.number(),
+    intervalMonths: v.number(),
+    nextDueMonth: v.number(),
+    active: v.boolean(),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
 });
