@@ -1,16 +1,6 @@
-import { memo } from "react";
 import { Link } from "react-router";
-import { LogoIcon } from "~/components/logo";
-import {
-  Convex,
-  Polar,
-  ReactIcon,
-  ReactRouter,
-  TailwindIcon,
-  Typescript,
-} from "~/components/logos";
+
 import { Button } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
 
 import { Check } from "lucide-react";
 import { Tagline } from "~/components/ui/tagline";
@@ -102,38 +92,6 @@ export default function IntegrationsSection({
             </div>
             <div className="dark:bg-muted/50 relative mx-auto w-fit order-1 lg:order-2">
               <div className="bg-radial to-muted dark:to-background absolute inset-0 z-10 from-transparent to-75%"></div>
-              <div className="mx-auto mb-2 flex w-fit justify-center gap-1 sm:gap-2">
-                <IntegrationCard>
-                  <ReactRouter />
-                </IntegrationCard>
-                <IntegrationCard>
-                  <Convex />
-                </IntegrationCard>
-              </div>
-              <div className="mx-auto my-2 flex w-fit justify-center gap-1 sm:gap-2">
-                <IntegrationCard>
-                  <ReactIcon />
-                </IntegrationCard>
-                <IntegrationCard
-                  borderClassName="shadow-black-950/10 shadow-xl border-black/25 dark:border-white/25"
-                  className="dark:bg-white/10"
-                >
-                  <LogoIcon />
-                </IntegrationCard>
-                <IntegrationCard>
-                  <TailwindIcon />
-                </IntegrationCard>
-              </div>
-
-              <div className="mx-auto flex w-fit justify-center gap-1 sm:gap-2">
-                <IntegrationCard>
-                  <Typescript />
-                </IntegrationCard>
-
-                <IntegrationCard>
-                  <Polar />
-                </IntegrationCard>
-              </div>
             </div>
           </div>
         </div>
@@ -141,35 +99,3 @@ export default function IntegrationsSection({
     </section>
   );
 }
-
-const IntegrationCard = memo(
-  ({
-    children,
-    className,
-    borderClassName,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-    borderClassName?: string;
-  }) => {
-    return (
-      <div
-        className={cn(
-          "bg-background relative flex size-16 sm:size-20 rounded-xl dark:bg-transparent",
-          className
-        )}
-      >
-        <div
-          role="presentation"
-          className={cn(
-            "absolute inset-0 rounded-xl border border-black/20 dark:border-white/25",
-            borderClassName
-          )}
-        />
-        <div className="relative z-20 m-auto size-fit *:size-6 sm:*:size-8">
-          {children}
-        </div>
-      </div>
-    );
-  }
-);

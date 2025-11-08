@@ -1,4 +1,3 @@
-"use client";
 import { useQuery, useAction } from "convex/react";
 import { useAuth } from "@clerk/react-router";
 import { Button } from "~/components/ui/button";
