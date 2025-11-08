@@ -1,6 +1,6 @@
-import { Tagline } from "./tagline";
-import { Card } from "../ui/card";
-import { CardContent } from "../ui/card";
+import { Tagline } from "~/components/ui/tagline";
+import { Card } from "~/components/ui/card";
+import { CardContent } from "~/components/ui/card";
 
 export const Why = () => {
   return (

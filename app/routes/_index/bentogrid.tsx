@@ -1,5 +1,5 @@
-import { Tagline } from "./tagline";
-import { Card, CardContent } from "../ui/card";
+import { Tagline } from "~/components/ui/tagline";
+import { Card, CardContent } from "~/components/ui/card";
 
 export const Bentogrid = () => {
   return (

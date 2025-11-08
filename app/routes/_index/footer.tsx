@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Separator } from "../ui/separator";
+import { Separator } from "~/components/ui/separator";
 
 export default function FooterSection() {
   return (

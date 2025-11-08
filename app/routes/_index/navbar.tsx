@@ -1,6 +1,5 @@
-"use client";
 import { UserButton } from "@clerk/react-router";
-import { Github, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import React, { useCallback } from "react";
 import { Link } from "react-router";
 import { Button } from "~/components/ui/button";
@@ -55,6 +54,8 @@ export const Navbar = ({
     : loaderData.hasActiveSubscription
       ? "Dashboard"
       : "Commencer maintenant";
+
+  console.log(loaderData);
   return (
     <header>
       <nav

@@ -3,9 +3,8 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "../ui/accordion";
-import { Button } from "../ui/button";
-import { Tagline } from "./tagline";
+} from "~/components/ui/accordion";
+import { Tagline } from "~/components/ui/tagline";
 
 export const Faq = () => {
   return (

@@ -11,9 +11,10 @@ import {
 } from "~/components/logos";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
-import { Navbar } from "./navbar";
+
 import { Check } from "lucide-react";
-import { Tagline } from "./tagline";
+import { Tagline } from "~/components/ui/tagline";
+import { Navbar } from "./navbar";
 
 export default function IntegrationsSection({
   loaderData,

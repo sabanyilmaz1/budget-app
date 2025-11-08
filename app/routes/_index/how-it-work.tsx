@@ -1,4 +1,4 @@
-import { Tagline } from "./tagline";
+import { Tagline } from "~/components/ui/tagline";
 import { Calendar, DollarSign, Eye, History } from "lucide-react";
 
 export const HowItWork = () => {

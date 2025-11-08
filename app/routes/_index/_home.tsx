@@ -1,14 +1,14 @@
 import { getAuth } from "@clerk/react-router/ssr.server";
 import { fetchAction, fetchQuery } from "convex/nextjs";
-import ContentSection from "~/components/homepage/content";
-import Footer from "~/components/homepage/footer";
-import Integrations from "~/components/homepage/integrations";
-import { api } from "../../convex/_generated/api";
-import type { Route } from "./+types/home";
-import { HowItWork } from "~/components/homepage/how-it-work";
-import { Why } from "~/components/homepage/why";
-import { Faq } from "~/components/homepage/faq";
-import { Bentogrid } from "~/components/homepage/bentogrid";
+
+import { api } from "../../../convex/_generated/api";
+import type { Route } from "./+types/_home";
+import IntegrationsSection from "./integrations";
+import { HowItWork } from "./how-it-work";
+import { Why } from "./why";
+import { Bentogrid } from "./bentogrid";
+import { Faq } from "./faq";
+import FooterSection from "./footer";
 
 export function meta({}: Route.MetaArgs) {
   const title = "React Starter Kit - Launch Your SAAS Quickly";
@@ -80,12 +80,12 @@ export async function loader(args: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   return (
     <>
-      <Integrations loaderData={loaderData} />
+      <IntegrationsSection loaderData={loaderData} />
       <HowItWork />
       <Why />
       <Bentogrid />
       <Faq />
-      <Footer />
+      <FooterSection />
     </>
   );
 }
