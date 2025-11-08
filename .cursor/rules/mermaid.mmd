@@ -1,91 +1,108 @@
 erDiagram
 
-%% =========================
-%% Périodes
-%% =========================
-MONTH {
-UUID id PK
-DATE month "ex: 2025-11-01 (1er du mois)"
-TEXT note "optionnel"
-}
+  %% =========================
+  %% Périodes
+  %% =========================
+  MONTH {
+    UUID id PK
+    DATE month          "ex: 2025-11-01 (1er du mois)"
+    TEXT note           "optionnel"
+  }
 
-%% =========================
-%% Dépenses fixes (modèles) -> EXPENSE (is_fixed=true)
-%% =========================
-FIXED_TEMPLATE {
-UUID id PK
-TEXT name
-BIGINT amount_cents
-INT day_of_month "1..31"
-BOOLEAN active
-}
+  %% =========================
+  %% Dépenses fixes (modèles) -> EXPENSE (is_fixed=true)
+  %% =========================
+  FIXED_TEMPLATE {
+    UUID id PK
+    TEXT name
+    BIGINT amount_cents
+    INT day_of_month     "1..31"
+    BOOLEAN active
+  }
 
-%% =========================
-%% Dépenses (fixes OU variables)
-%% =========================
-EXPENSE {
-UUID id PK
-UUID month_id FK
-UUID fixed_template_id FK "optionnel, si issu d'un template"
-BIGINT amount_cents
-TEXT description
-TEXT label "ex: 'Courses', 'Loyer', 'Essence'"
-TIMESTAMPTZ happened_at
-BOOLEAN is_fixed "true si occurrence de fixe"
-BOOLEAN is_paid "utile surtout pour les fixes"
-}
+  %% =========================
+  %% Dépenses (fixes OU variables)
+  %% =========================
+  EXPENSE {
+    UUID id PK
+    UUID month_id FK
+    UUID fixed_template_id FK "optionnel si issu d'un template"
+    BIGINT amount_cents
+    TEXT description
+    TEXT label            "ex: 'Courses', 'Loyer', 'Essence'"
+    TIMESTAMPTZ happened_at
+    BOOLEAN is_fixed      "true si occurrence de fixe"
+    BOOLEAN is_paid       "utile surtout pour les fixes"
+  }
 
-MONTH ||--o{ EXPENSE : "contient"
-FIXED_TEMPLATE ||--o{ EXPENSE : "peut générer"
+  MONTH ||--o{ EXPENSE : "contient"
+  FIXED_TEMPLATE ||--o{ EXPENSE : "peut générer"
 
-%% =========================
-%% Enveloppes globales + apports mensuels
-%% =========================
-ENVELOPE {
-UUID id PK
-TEXT name
-BIGINT ceiling_cents "plafond global (optionnel)"
-BIGINT balance_cents "solde actuel"
-}
+  %% =========================
+  %% Enveloppes globales + apports mensuels
+  %% =========================
+  ENVELOPE {
+    UUID id PK
+    TEXT name
+    BIGINT ceiling_cents   "plafond global (optionnel)"
+    BIGINT balance_cents   "solde actuel"
+  }
 
-ENVELOPE_CONTRIBUTION {
-UUID id PK
-UUID envelope_id FK
-UUID month_id FK
-BIGINT amount_cents "ajout ce mois"
-TIMESTAMPTZ contributed_at
-TEXT note "optionnel"
-}
+  ENVELOPE_CONTRIBUTION {
+    UUID id PK
+    UUID envelope_id FK
+    UUID month_id FK
+    BIGINT amount_cents     "ajout ce mois"
+    TIMESTAMPTZ contributed_at
+    TEXT note               "optionnel"
+  }
 
-ENVELOPE ||--o{ ENVELOPE_CONTRIBUTION : "reçoit"
-MONTH ||--o{ ENVELOPE_CONTRIBUTION : "depuis"
+  ENVELOPE ||--o{ ENVELOPE_CONTRIBUTION : "reçoit"
+  MONTH ||--o{ ENVELOPE_CONTRIBUTION : "depuis"
 
-%% =========================
-%% Épargne (simple)
-%% =========================
-SAVINGS {
-UUID id PK
-BIGINT balance_cents "solde global d'épargne"
-TIMESTAMPTZ updated_at
-}
+  %% =========================
+  %% Épargne (simple)
+  %% =========================
+  SAVINGS {
+    UUID id PK
+    BIGINT balance_cents   "solde global d'épargne"
+    TIMESTAMPTZ updated_at
+  }
 
-SAVINGS_MOVE {
-UUID id PK
-UUID savings_id FK
-BIGINT amount_cents "+ ajout / - retrait"
-TIMESTAMPTZ moved_at
-TEXT note "optionnel"
-}
+  SAVINGS_MOVE {
+    UUID id PK
+    UUID savings_id FK
+    BIGINT amount_cents    "+ ajout / - retrait"
+    TIMESTAMPTZ moved_at
+    TEXT note              "optionnel"
+  }
 
-SAVINGS ||--o{ SAVINGS_MOVE : "historique"
+  SAVINGS ||--o{ SAVINGS_MOVE : "historique"
 
-%% =========================
-%% Formule d’épargne personnalisée
-%% =========================
-SAVINGS_FORMULA {
-UUID id PK
-TEXT formula_text "ex: '(solde_actuel - depenses_fixes - echeances) \* 0.65'"
-TIMESTAMPTZ updated_at
-}
+  %% =========================
+  %% Formule d’épargne personnalisée
+  %% =========================
+  SAVINGS_FORMULA {
+    UUID id PK
+    TEXT formula_text      "ex: '(solde_actuel - depenses_fixes) * 0.65'"
+    TIMESTAMPTZ updated_at
+  }
 
-SAVINGS ||--|| SAVINGS_FORMULA : "utilise"
+  SAVINGS ||--|| SAVINGS_FORMULA : "utilise"
+
+  %% =========================
+  %% Dépenses périodiques (rappel uniquement)
+  %% =========================
+  FIXED_PERIODIC {
+    UUID id PK
+    TEXT name
+    BIGINT amount_cents
+    INT interval_months     "ex: 3, 4, 6, 12"
+    DATE anchor_month       "mois de départ (1er du mois)"
+    DATE next_due_month     "prochaine échéance estimée"
+    BOOLEAN active
+    TEXT note               "optionnel"
+  }
+
+  %% Remarque : FIXED_PERIODIC est volontairement SANS lien vers les autres tables.
+  %% Il sert uniquement de registre de rappels (aucune création auto dans EXPENSE).
