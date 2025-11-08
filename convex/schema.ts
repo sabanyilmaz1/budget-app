@@ -8,6 +8,7 @@ export default defineSchema({
     image: v.optional(v.string()),
     tokenIdentifier: v.string(),
   }).index("by_token", ["tokenIdentifier"]),
+
   subscriptions: defineTable({
     userId: v.optional(v.string()),
     polarId: v.optional(v.string()),
@@ -31,6 +32,7 @@ export default defineSchema({
   })
     .index("userId", ["userId"])
     .index("polarId", ["polarId"]),
+
   webhookEvents: defineTable({
     type: v.string(),
     polarEventId: v.string(),
