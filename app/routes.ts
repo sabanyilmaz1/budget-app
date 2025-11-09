@@ -20,7 +20,7 @@ export default [
   ),
 
   // Dashboard routes
-  layout("routes/dashboard/layout.tsx", [
-    route("dashboard", "routes/dashboard/index.tsx"),
+  layout("routes/_dashboard/_layout.tsx", [
+    route("dashboard", "routes/_dashboard/_index.tsx"),
   ]),
 ] satisfies RouteConfig;

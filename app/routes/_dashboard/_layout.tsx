@@ -1,13 +1,10 @@
 import { getAuth } from "@clerk/react-router/ssr.server";
 import { fetchQuery } from "convex/nextjs";
-import { redirect, useLoaderData } from "react-router";
-import { AppSidebar } from "~/components/dashboard/app-sidebar";
-import { SiteHeader } from "~/components/dashboard/site-header";
-import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
+import { redirect } from "react-router";
 import { api } from "../../../convex/_generated/api";
-import type { Route } from "./+types/layout";
 import { createClerkClient } from "@clerk/react-router/api.server";
 import { Outlet } from "react-router";
+import type { Route } from "./+types/_layout";
 
 export async function loader(args: Route.LoaderArgs) {
   const { userId } = await getAuth(args);
@@ -22,7 +19,7 @@ export async function loader(args: Route.LoaderArgs) {
     fetchQuery(api.subscriptions.checkUserSubscriptionStatus, { userId }),
     createClerkClient({
       secretKey: process.env.CLERK_SECRET_KEY,
-    }).users.getUser(userId)
+    }).users.getUser(userId),
   ]);
 
   // Redirect to subscription-required if no active subscription
@@ -34,22 +31,5 @@ export async function loader(args: Route.LoaderArgs) {
 }
 
 export default function DashboardLayout() {
-  const { user } = useLoaderData();
-
-  return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar variant="inset" user={user} />
-      <SidebarInset>
-        <SiteHeader />
-        <Outlet />
-      </SidebarInset>
-    </SidebarProvider>
-  );
+  return <Outlet />;
 }
