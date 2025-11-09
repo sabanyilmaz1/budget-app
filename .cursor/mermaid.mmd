@@ -20,6 +20,16 @@ erDiagram
     BOOLEAN active
   }
 
+    INSTALLMENT_PLAN {
+    UUID id PK
+    TEXT name
+    BIGINT total_cents
+    INT months_count
+    DATE start_month
+    BOOLEAN active
+    TEXT note
+  }
+
   %% =========================
   %% Dépenses (fixes OU variables)
   %% =========================
@@ -27,6 +37,7 @@ erDiagram
     UUID id PK
     UUID month_id FK
     UUID fixed_template_id FK "optionnel si vient d'un template"
+    UUID installment_plan_id FK    "optionnel"
     BIGINT amount_cents
     TEXT description
     TEXT label            "ex: 'Courses', 'Loyer', 'Essence'"

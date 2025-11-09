@@ -5,6 +5,7 @@ import { api } from "../../../convex/_generated/api";
 import { createClerkClient } from "@clerk/react-router/api.server";
 import { Outlet } from "react-router";
 import type { Route } from "./+types/_layout";
+import { NavbarAuthenticated } from "./components/navbarAuthenticated";
 
 export async function loader(args: Route.LoaderArgs) {
   const { userId } = await getAuth(args);
@@ -31,5 +32,10 @@ export async function loader(args: Route.LoaderArgs) {
 }
 
 export default function DashboardLayout() {
-  return <Outlet />;
+  return (
+    <main>
+      <NavbarAuthenticated />
+      <Outlet />
+    </main>
+  );
 }

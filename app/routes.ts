@@ -20,7 +20,10 @@ export default [
   ),
 
   // Dashboard routes
-  layout("routes/_dashboard/_layout.tsx", [
-    route("dashboard", "routes/_dashboard/_index.tsx"),
+  layout("routes/_authenticated/_layout.tsx", [
+    route("dashboard", "routes/_authenticated/_index.tsx"),
+    route("month/:monthId", "routes/_authenticated/_month/_month.tsx"),
+    route("savings", "routes/_authenticated/_savings/_savings.tsx"),
+    route("settings", "routes/_authenticated/_settings/_settings.tsx"),
   ]),
 ] satisfies RouteConfig;

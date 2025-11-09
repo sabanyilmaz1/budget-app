@@ -75,6 +75,20 @@ export default defineSchema({
     updatedAt: v.number(),
   }),
 
+  installmentPlan: defineTable({
+    name: v.string(),
+    amount: v.number(),
+    monthsCount: v.number(),
+    startMonth: v.number(),
+    endMonth: v.number(),
+    currentMonth: v.number(),
+    currentAmount: v.number(),
+    active: v.boolean(),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }),
+
   expense: defineTable({
     monthId: v.string(),
     fixedExpenseId: v.optional(v.string()), //optional if the expense is not a fixed expense
