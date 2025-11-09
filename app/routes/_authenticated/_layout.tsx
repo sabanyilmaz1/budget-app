@@ -16,11 +16,12 @@ export async function loader(args: Route.LoaderArgs) {
   }
 
   // Parallel data fetching to reduce waterfall
-  const [subscriptionStatus, user] = await Promise.all([
+  const [subscriptionStatus, user, lastMonth] = await Promise.all([
     fetchQuery(api.subscriptions.checkUserSubscriptionStatus, { userId }),
     createClerkClient({
       secretKey: process.env.CLERK_SECRET_KEY,
     }).users.getUser(userId),
+    fetchQuery(api.month.getLastMonth),
   ]);
 
   // Redirect to subscription-required if no active subscription
@@ -28,7 +29,7 @@ export async function loader(args: Route.LoaderArgs) {
     throw redirect("/subscription-required");
   }
 
-  return { user };
+  return { user, lastMonth };
 }
 
 export default function DashboardLayout() {

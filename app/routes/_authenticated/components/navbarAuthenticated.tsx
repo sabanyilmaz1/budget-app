@@ -1,15 +1,17 @@
 import { Calendar, LayoutDashboard, PiggyBank, Settings } from "lucide-react";
 import { href, Link, useLocation } from "react-router";
 import { Button } from "~/components/ui/button";
-
-//TODO : - check the last month for the month page
-//TODO : - add href for other routes
+import { useAuthenticatedLayoutData } from "~/routes/useTypedRouteLoaderData";
 
 export const NavbarAuthenticated = () => {
-  const monthId = "1";
+  const { lastMonth } = useAuthenticatedLayoutData();
   const pathname = useLocation();
 
   const isActive = (href: string) => pathname.pathname === href;
+  const monthId = lastMonth?._id;
+  const hasLastMonth = !!monthId;
+
+  console.log("hasLastMonth", hasLastMonth);
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
@@ -33,26 +35,32 @@ export const NavbarAuthenticated = () => {
                 <span className="hidden sm:inline">Dashboard</span>
               </Link>
             </Button>
-            <Button
-              variant={
-                isActive(href("/month/:monthId", { monthId }))
-                  ? "default"
-                  : "ghost"
-              }
-              size="sm"
-              className="gap-2"
-              // disabled={!selectedMonth}
-              asChild
-            >
-              <Link
-                to={href("/month/:monthId", {
-                  monthId,
-                })}
+            {hasLastMonth ? (
+              <Button
+                variant={
+                  isActive(href("/month/:monthId", { monthId }))
+                    ? "default"
+                    : "ghost"
+                }
+                size="sm"
+                className="gap-2"
+                asChild
               >
+                <Link
+                  to={href("/month/:monthId", {
+                    monthId,
+                  })}
+                >
+                  <Calendar className="h-4 w-4" />
+                  <span className="hidden sm:inline">Mois</span>
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="ghost" size="sm" className="gap-2" disabled>
                 <Calendar className="h-4 w-4" />
                 <span className="hidden sm:inline">Mois</span>
-              </Link>
-            </Button>
+              </Button>
+            )}
             <Button
               variant={isActive(href("/savings")) ? "default" : "ghost"}
               size="sm"
